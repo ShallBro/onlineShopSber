@@ -1,6 +1,8 @@
 package com.example.onlineShop.configuration;
 
 
+import com.example.onlineShop.dao.PhoneDAO;
+import com.example.onlineShop.dao.impl.PhoneDAOImpl;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
