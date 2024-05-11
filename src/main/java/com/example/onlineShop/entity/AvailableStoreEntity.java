@@ -46,9 +46,6 @@ public class AvailableStoreEntity {
     this.name = name;
   }
 
-  /**
-   * Пустой конструктор.
-   */
   public AvailableStoreEntity() {
 
   }

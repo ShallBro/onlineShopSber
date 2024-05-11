@@ -33,19 +33,14 @@ public class OnlineShopService {
    * Получить список всех доступных телефонов.
    * @return Список объектов типа Phone, представляющих доступные телефоны
    */
-  public List<Phone> allAvailablePhones(){
+  public List<Phone> allAvailablePhones() {
     List<PhoneEntity> phoneEntities = phoneDAO.get();
     loggerService.getLoggerReadPhoneEntity();
     List<Phone> phoneList = new ArrayList<>();
     phoneEntities.forEach(phoneEntity -> {
-      Phone phone = new Phone();
       List<String> availableStores = new ArrayList<>();
       phoneEntity.getAvailableStoreEntities().forEach(availableStoreEntity -> availableStores.add(availableStoreEntity.getName()));
-      phone.setId(phoneEntity.getId());
-      phone.setModelPhone(phoneEntity.getModel());
-      phone.setAvailableStores(availableStores);
-      phone.setCost(phoneEntity.getCost());
-      phoneList.add(phone);
+      phoneList.add(new Phone(phoneEntity.getId(), phoneEntity.getModel(), availableStores, phoneEntity.getCost()));
     });
     return phoneList;
   }

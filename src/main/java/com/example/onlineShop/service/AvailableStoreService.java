@@ -39,12 +39,12 @@ public class AvailableStoreService {
   public void updateAvailableStores(Session session, PhoneEntity phoneEntity, List<String> newAvailableStores) {
     List<AvailableStoreEntity> updatedAvailableStores = new ArrayList<>();
     newAvailableStores.forEach(store -> {
-      AvailableStoreEntity existServer = findStore(phoneEntity.getAvailableStoreEntities(), store);
-      if (existServer != null) {
-        updatedAvailableStores.add(existServer);
+      AvailableStoreEntity existStore = findStore(phoneEntity.getAvailableStoreEntities(), store);
+      if (existStore != null) {
+        updatedAvailableStores.add(existStore);
       } else {
-        AvailableStoreEntity newServer = new AvailableStoreEntity(phoneEntity, store);
-        updatedAvailableStores.add(newServer);
+        AvailableStoreEntity newStore = new AvailableStoreEntity(phoneEntity, store);
+        updatedAvailableStores.add(newStore);
       }
     });
     availableStoreDAO.update(updatedAvailableStores, phoneEntity, session);
@@ -53,13 +53,13 @@ public class AvailableStoreService {
 
   /**
    * Поиск доступного магазина в списке по его имени.
-   * @param availableServers Список доступных магазинов
+   * @param availableStores Список доступных магазинов
    * @param store Имя магазина для поиска
    * @return Объект типа AvailableStoreEntity, представляющий найденный магазин, или null, если магазин не найден
    */
-  private AvailableStoreEntity findStore(List<AvailableStoreEntity> availableServers, String store) {
-    return availableServers.stream()
-      .filter(availableServer -> availableServer.getName().equals(store))
+  private AvailableStoreEntity findStore(List<AvailableStoreEntity> availableStores, String store) {
+    return availableStores.stream()
+      .filter(availableStore -> availableStore.getName().equals(store))
       .findFirst()
       .orElse(null);
   }

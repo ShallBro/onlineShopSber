@@ -52,9 +52,6 @@ public class PhoneEntity {
     this.cost = cost;
   }
 
-  /**
-   * Пустой конструктор.
-   */
   public PhoneEntity() {
 
   }
