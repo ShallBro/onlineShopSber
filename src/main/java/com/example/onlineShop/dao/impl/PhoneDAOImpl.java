@@ -26,8 +26,9 @@ public class PhoneDAOImpl implements PhoneDAO {
 
   /**
    * Конструктор класса.
-   * @param sessionFactory Фабрика сессий Hibernate
-   * @param availableStoreDAO Объект доступа к данным о доступных магазинах
+   *
+   * @param sessionFactory        Фабрика сессий Hibernate
+   * @param availableStoreDAO     Объект доступа к данным о доступных магазинах
    * @param availableStoreService Сервис для работы с доступными магазинами
    */
   @Autowired

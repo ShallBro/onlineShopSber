@@ -21,8 +21,9 @@ public class AvailableStoreService {
 
   /**
    * Конструктор класса.
+   *
    * @param availableStoreDAO Объект доступа к данным о доступных магазинах
-   * @param loggerService Сервис логирования
+   * @param loggerService     Сервис логирования
    */
   @Autowired
   public AvailableStoreService(AvailableStoreDAO availableStoreDAO, LoggerService loggerService) {
@@ -32,8 +33,9 @@ public class AvailableStoreService {
 
   /**
    * Обновить доступные магазины для указанного телефона.
-   * @param session Сессия Hibernate для выполнения операций с базой данных
-   * @param phoneEntity Объект типа PhoneEntity, представляющий сущность телефона
+   *
+   * @param session            Сессия Hibernate для выполнения операций с базой данных
+   * @param phoneEntity        Объект типа PhoneEntity, представляющий сущность телефона
    * @param newAvailableStores Новый список доступных магазинов для телефона
    */
   public void updateAvailableStores(Session session, PhoneEntity phoneEntity, List<String> newAvailableStores) {
@@ -53,8 +55,9 @@ public class AvailableStoreService {
 
   /**
    * Поиск доступного магазина в списке по его имени.
+   *
    * @param availableStores Список доступных магазинов
-   * @param store Имя магазина для поиска
+   * @param store           Имя магазина для поиска
    * @return Объект типа AvailableStoreEntity, представляющий найденный магазин, или null, если магазин не найден
    */
   private AvailableStoreEntity findStore(List<AvailableStoreEntity> availableStores, String store) {

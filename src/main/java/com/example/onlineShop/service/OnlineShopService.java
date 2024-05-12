@@ -20,7 +20,8 @@ public class OnlineShopService {
 
   /**
    * Конструктор сервиса.
-   * @param phoneDAO Объект для доступа к данным телефонов
+   *
+   * @param phoneDAO      Объект для доступа к данным телефонов
    * @param loggerService Сервис для логирования действий
    */
   @Autowired
@@ -31,6 +32,7 @@ public class OnlineShopService {
 
   /**
    * Получить список всех доступных телефонов.
+   *
    * @return Список объектов типа Phone, представляющих доступные телефоны
    */
   public List<Phone> allAvailablePhones() {
@@ -47,6 +49,7 @@ public class OnlineShopService {
 
   /**
    * Добавить новый телефон.
+   *
    * @param phone Объект типа Phone, представляющий новый телефон
    */
   public void addPhone(Phone phone) {
@@ -57,6 +60,7 @@ public class OnlineShopService {
 
   /**
    * Обновить информацию о телефоне.
+   *
    * @param phone Объект типа Phone, представляющий информацию для обновления
    * @return Объект типа PhoneEntity, обновленный телефон или null, если телефон не найден
    */
@@ -72,6 +76,7 @@ public class OnlineShopService {
 
   /**
    * Удалить телефон по его идентификатору.
+   *
    * @param idPhone Идентификатор удаляемого телефона
    * @return Объект типа PhoneEntity, удаленный телефон или null, если телефон не найден
    */
@@ -88,8 +93,9 @@ public class OnlineShopService {
 
   /**
    * Найти телефон по его идентификатору.
+   *
    * @param phoneEntities Список объектов типа PhoneEntity
-   * @param idPhone Идентификатор телефона
+   * @param idPhone       Идентификатор телефона
    * @return Объект типа PhoneEntity, найденный телефон или null, если телефон не найден
    */
   private PhoneEntity findPhoneEntityById(List<PhoneEntity> phoneEntities, long idPhone) {

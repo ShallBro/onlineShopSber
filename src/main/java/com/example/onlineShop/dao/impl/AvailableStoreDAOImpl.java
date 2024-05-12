@@ -25,8 +25,9 @@ public class AvailableStoreDAOImpl implements AvailableStoreDAO {
 
   /**
    * Конструктор класса.
+   *
    * @param sessionFactory Фабрика сессий Hibernate
-   * @param loggerService Сервис логирования
+   * @param loggerService  Сервис логирования
    */
   @Autowired
   public AvailableStoreDAOImpl(SessionFactory sessionFactory, LoggerService loggerService) {

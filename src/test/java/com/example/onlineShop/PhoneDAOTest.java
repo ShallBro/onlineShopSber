@@ -1,7 +1,6 @@
 package com.example.onlineShop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -28,98 +27,98 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PhoneDAOTest {
 
-	@Mock
-	private SessionFactory sessionFactory;
+  @Mock
+  private SessionFactory sessionFactory;
 
-	@Mock
-	private AvailableStoreDAO availableStoreDAO;
+  @Mock
+  private AvailableStoreDAO availableStoreDAO;
 
-	@Mock
-	private AvailableStoreService availableStoreService;
+  @Mock
+  private AvailableStoreService availableStoreService;
 
-	@Mock
-	private Session session;
+  @Mock
+  private Session session;
 
-	private PhoneDAO phoneDAO;
+  private PhoneDAO phoneDAO;
 
-	@BeforeEach
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-		phoneDAO = new PhoneDAOImpl(sessionFactory, availableStoreDAO, availableStoreService);
-	}
+  @BeforeEach
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
+    phoneDAO = new PhoneDAOImpl(sessionFactory, availableStoreDAO, availableStoreService);
+  }
 
-	@Test
-	void testCreatePhone() {
-		Phone phone = new Phone(1L, "TestModel", List.of("Test","Test1"), 100);
+  @Test
+  void testCreatePhone() {
+    Phone phone = new Phone(1L, "TestModel", List.of("Test", "Test1"), 100);
 
-		when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
 
-		PhoneEntity phoneEntityMock = new PhoneEntity("TestModel", 100, 1L);
+    PhoneEntity phoneEntityMock = new PhoneEntity("TestModel", 100, 1L);
 
-		doNothing().when(session).persist(any(PhoneEntity.class));
+    doNothing().when(session).persist(any(PhoneEntity.class));
 
-		phoneDAO.create(phone);
+    phoneDAO.create(phone);
 
-		verify(session).persist(any(PhoneEntity.class));
+    verify(session).persist(any(PhoneEntity.class));
 
-		when(session.load(PhoneEntity.class, phone.getId())).thenReturn(phoneEntityMock);
+    when(session.load(PhoneEntity.class, phone.getId())).thenReturn(phoneEntityMock);
 
-		PhoneEntity newPhoneEntity = session.load(PhoneEntity.class, phone.getId());
+    PhoneEntity newPhoneEntity = session.load(PhoneEntity.class, phone.getId());
 
-		assertPhoneEntity("TestModel", 100, 1L, newPhoneEntity);
-	}
+    assertPhoneEntity("TestModel", 100, 1L, newPhoneEntity);
+  }
 
-	@Test
-	void testUpdatePhone() {
-		Phone phone = new Phone(1L, "UpdatedModel", List.of("Test","Test1"), 200);
-		PhoneEntity phoneEntity = new PhoneEntity("TestModel", 100, 1L);
+  @Test
+  void testUpdatePhone() {
+    Phone phone = new Phone(1L, "UpdatedModel", List.of("Test", "Test1"), 200);
+    PhoneEntity phoneEntity = new PhoneEntity("TestModel", 100, 1L);
 
-		when(sessionFactory.getCurrentSession()).thenReturn(session);
-		when(session.get(PhoneEntity.class, phone.getId())).thenReturn(phoneEntity);
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(session.get(PhoneEntity.class, phone.getId())).thenReturn(phoneEntity);
 
-		phoneDAO.update(phone);
+    phoneDAO.update(phone);
 
-		verify(session).merge(any(PhoneEntity.class));
+    verify(session).merge(any(PhoneEntity.class));
 
-		PhoneEntity updatedPhoneEntity = session.get(PhoneEntity.class, phone.getId());
+    PhoneEntity updatedPhoneEntity = session.get(PhoneEntity.class, phone.getId());
 
-		assertPhoneEntity("UpdatedModel", 200, 1L, updatedPhoneEntity);
-	}
+    assertPhoneEntity("UpdatedModel", 200, 1L, updatedPhoneEntity);
+  }
 
-	@Test
-	void testGetAllPhones() {
-		List<PhoneEntity> phoneEntities = new ArrayList<>();
-		phoneEntities.add(new PhoneEntity("TestModel1", 100, 1L));
-		phoneEntities.add(new PhoneEntity("TestModel2", 200, 2L));
+  @Test
+  void testGetAllPhones() {
+    List<PhoneEntity> phoneEntities = new ArrayList<>();
+    phoneEntities.add(new PhoneEntity("TestModel1", 100, 1L));
+    phoneEntities.add(new PhoneEntity("TestModel2", 200, 2L));
 
-		Query query = mock(Query.class);
-		when(query.getResultList()).thenReturn(phoneEntities);
-		when(sessionFactory.getCurrentSession()).thenReturn(session);
-		when(session.createQuery("FROM PhoneEntity")).thenReturn(query);
+    Query query = mock(Query.class);
+    when(query.getResultList()).thenReturn(phoneEntities);
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(session.createQuery("FROM PhoneEntity")).thenReturn(query);
 
-		List<PhoneEntity> result = phoneDAO.get();
-		assertEquals(2, result.size());
+    List<PhoneEntity> result = phoneDAO.get();
+    assertEquals(2, result.size());
 
-		assertPhoneEntity("TestModel1", 100, 1L, result.get(0));
-		assertPhoneEntity("TestModel2", 200, 2L, result.get(1));
-	}
+    assertPhoneEntity("TestModel1", 100, 1L, result.get(0));
+    assertPhoneEntity("TestModel2", 200, 2L, result.get(1));
+  }
 
-	@Test
-	void testDeletePhone() {
-		PhoneEntity phoneEntity = new PhoneEntity("TestModel", 100, 1L);
+  @Test
+  void testDeletePhone() {
+    PhoneEntity phoneEntity = new PhoneEntity("TestModel", 100, 1L);
 
-		when(sessionFactory.getCurrentSession()).thenReturn(session);
-		when(session.get(PhoneEntity.class, 1)).thenReturn(phoneEntity);
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(session.get(PhoneEntity.class, 1)).thenReturn(phoneEntity);
 
-		phoneDAO.delete(1);
+    phoneDAO.delete(1);
 
-		verify(session).remove(phoneEntity);
-	}
+    verify(session).remove(phoneEntity);
+  }
 
-	private void assertPhoneEntity(String phone, Integer cost, Long id, PhoneEntity phoneEntity) {
-		assertEquals(phone, phoneEntity.getModel());
-		assertEquals(cost, phoneEntity.getCost());
-		assertEquals(id, phoneEntity.getId());
-	}
+  private void assertPhoneEntity(String phone, Integer cost, Long id, PhoneEntity phoneEntity) {
+    assertEquals(phone, phoneEntity.getModel());
+    assertEquals(cost, phoneEntity.getCost());
+    assertEquals(id, phoneEntity.getId());
+  }
 
 }

@@ -38,8 +38,9 @@ public class AvailableStoreEntity {
 
   /**
    * Конструктор с параметрами.
+   *
    * @param phoneEntityId Телефон, который доступен в этом магазине
-   * @param name Название магазина
+   * @param name          Название магазина
    */
   public AvailableStoreEntity(PhoneEntity phoneEntityId, String name) {
     this.phoneEntityId = phoneEntityId;

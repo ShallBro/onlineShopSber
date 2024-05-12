@@ -25,6 +25,7 @@ public class OnlineShopController {
 
   /**
    * Конструктор контроллера.
+   *
    * @param onlineShopService Сервис для работы с телефонами в маркетплейсе
    */
   @Autowired
@@ -34,6 +35,7 @@ public class OnlineShopController {
 
   /**
    * Получить список всех доступных телефонов.
+   *
    * @return Список объектов типа Phone, представляющих доступные телефоны
    */
   @GetMapping("/allPhones")
@@ -43,6 +45,7 @@ public class OnlineShopController {
 
   /**
    * Добавить новый телефон.
+   *
    * @param phone Объект типа Phone, представляющий новый телефон
    */
   @PostMapping("/addPhone")
@@ -52,6 +55,7 @@ public class OnlineShopController {
 
   /**
    * Обновить информацию о телефоне.
+   *
    * @param phone Объект типа Phone, представляющий информацию для обновления
    * @throws PhoneNotFoundException Если телефон не найден
    */
@@ -65,6 +69,7 @@ public class OnlineShopController {
 
   /**
    * Удалить телефон по его идентификатору.
+   *
    * @param idPhone Идентификатор удаляемого телефона
    * @throws PhoneNotFoundException Если телефон не найден
    */

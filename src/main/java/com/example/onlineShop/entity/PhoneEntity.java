@@ -42,9 +42,10 @@ public class PhoneEntity {
 
   /**
    * Конструктор с параметрами.
+   *
    * @param model Модель телефона
-   * @param cost Стоимость телефона
-   * @param id Уникальный идентификатор телефона
+   * @param cost  Стоимость телефона
+   * @param id    Уникальный идентификатор телефона
    */
   public PhoneEntity(String model, Integer cost, Long id) {
     this.id = id;
